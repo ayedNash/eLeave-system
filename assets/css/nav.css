@@ -1,0 +1,122 @@
+
+/* nav for both admin n user dashboard */
+
+
+
+img{
+    width:"24";
+     height:"24"; 
+}
+/* nav */
+.nav {
+    width: 220px;
+    background-color: #2563eb;
+    color: #fff;
+    height: 100vh; 
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    position: fixed; 
+    top: 0;
+    left: 0;
+}
+.nav h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.nav ul {
+    list-style: none;
+    padding: 0;
+   
+}
+.nav ul li {
+    margin: 15px 0;
+    border:ridge 3px black;
+}
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.nav ul li a:hover {
+    background-color: #1da9d8;
+}
+
+/*  Content */
+.main-content {
+    margin-left: 240px; 
+    width: 100%;
+}
+.mainContentList{
+    margin-left: 240px; 
+}
+
+header {
+    background: #2563eb;
+    color: #fff;
+    padding: 20px 10%;
+    text-align: left;
+}
+
+#adminHeader
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+header p {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 80%;
+}
+
+/* Cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    flex: 1 1 calc(33% - 20px);
+    text-align: center;
+}
+.card h2 {
+    margin: 0;
+    color: #2563eb;
+    font-size: 22px;
+}
+.card p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Notice Section */
+.notice {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+}
+.notice h3 {
+    margin-top: 0;
+    color: #333;
+}
+.notice p {
+    font-size: 14px;
+    line-height: 1.6;
+}
