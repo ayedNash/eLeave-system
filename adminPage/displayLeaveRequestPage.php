@@ -173,10 +173,12 @@ $mysql_db->close();
                         <th>Leave Start Date</th>
                         <th>Leave End Date</th>
                         <th>Leave Period</th>
+>>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                             <tr>
                                 <td></td>
                                 <td></td>
