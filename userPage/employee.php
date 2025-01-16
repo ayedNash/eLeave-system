@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // success message
             echo "<script>alert('Employee data successfully added!`');
              window.location.href = 'employee.php';
+              window.location.href = 'employee.php?empID=' + encodeURIComponent('$empID');
              </script>";
         } else {
             echo "Something went wrong. Please try again later.";
@@ -168,17 +169,24 @@ $mysql_db->close();
         <ul>
             <li>
                 <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" alt="home" />
+                <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" />
                     Home</a>
             </li>
             <li>
                 <a href="employee.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
+                        src="https://img.icons8.com/material/24/conference-background-selected.png" />Employees</a>
             </li>
             <li>
                 <a href="profile.php?empID=<?php echo htmlspecialchars($empID) ?>">
                     <img src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Profile" />Profile</a>
+                    <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Profile</a>
+            </li>
+            <li>
+                <a href="displayLeaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">
+                    <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Leave Request</a>
             </li>
         </ul>
     </div>
