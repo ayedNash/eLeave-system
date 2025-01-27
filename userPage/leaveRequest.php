@@ -6,40 +6,16 @@ session_start();
 // Include config file
 require_once "../database/config.php";
 
-<<<<<<< HEAD
-// $empID = $_SESSION['empID'];
-
-// Define variables and initialize with empty values. 
-$empID = $empName = $empRole = $empType = $empPosition = $empPassword = $empJoinDate = $empAnnLeave = "";
-=======
 $empID = $_SESSION['empID'];
 
 // Define variables and initialize with empty values. 
 $empID = $leaveType = $leaveStart = $leaveEnd = $leaveReason = $leaveAttachment = "";
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
 
 // Process submitted form data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate personal details fields
     $empID = trim($_POST['empID']);
-<<<<<<< HEAD
-    $empRole = trim($_POST['roleName']);
-    $empType = trim($_POST['employeetypeName']);
-    $empPosition = trim($_POST['positionName']);
-    $empName = trim($_POST['personalName']);
-    $empPassword = trim($_POST['employeePassword']);
-    $empJoinDate = trim($_POST['employeeJoinDate']);
-    $empAnnLeave = trim($_POST['employeeAnnLvBal']);
-
-    // Hash the password
-    $hashedPassword = password_hash($empPassword, PASSWORD_BCRYPT);
-
-    // Insert into employee table.
-    $sql = "INSERT INTO employee
-            (EmployeeID, RoleID, EmployeeTypeID, PositionID, PersonalDetailsID, EmployeePassword, EmployeeJoinDate, EmployeeAnnLeaveBalance) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-=======
     $leaveType = trim($_POST['leavetype']);
     $leaveStart = trim($_POST['startdate']);
     $leaveEnd = trim($_POST['enddate']);
@@ -50,23 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "INSERT INTO leaveapplication
             (EmployeeID, LeaveTypeID, LeaveStartDate, LeaveEndDate, LeaveReason, LeaveAttachment) 
             VALUES (?, ?, ?, ?, ?, ?)";
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
 
     if ($stmt = $mysql_db->prepare($sql)) {
 
         // Bind paramaters to the prepared statement
         $stmt->bind_param(
-<<<<<<< HEAD
-            "siiiissi",
-            $empID,
-            $empRole,
-            $empType,
-            $empPosition,
-            $empName,
-            $hashedPassword,
-            $empJoinDate,
-            $empAnnLeave
-=======
             "sissss",
             $empID,
             $leaveType,
@@ -74,19 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $leaveEnd,
             $leaveReason,
             $leaveAttachment
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
         );
 
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             // success message
-<<<<<<< HEAD
-            echo "<script>alert('Employee data  successfully added!`');
-            window.location.href = 'displayEmployeePage.php';
-=======
             echo "<script>alert('Leave Request successfully added!`');
             window.location.href = 'displayLeaveRequest.php?empID=' + encodeURIComponent('$empID');
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
             </script>";
         } else {
             echo "Something went wrong. Please try again later.";
@@ -99,20 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-<<<<<<< HEAD
-// Check if editing a employee
-=======
 // To called employee details.
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
 if (isset($_GET['empID'])) {
     $empID = $_GET['empID'];
 
     // Fetch employee details
-<<<<<<< HEAD
-    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, EmployeeAnnLeaveBalance    
-=======
     $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName   
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
          FROM employee
          LEFT JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID
          WHERE EmployeeID = ? ";
@@ -128,10 +78,6 @@ if (isset($_GET['empID'])) {
                 $empID = $row['EmployeeID'];
                 $empPersonalID = $row['PersonalDetailsID'];
                 $empName = $row['PersonalName'];
-<<<<<<< HEAD
-                $empAnnLeave = $row['EmployeeAnnLeaveBalance'];
-=======
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
             } else {
                 echo "Employee Details not found.";
                 exit;
@@ -201,11 +147,7 @@ $mysql_db->close();
                     <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Profile</a>
             </li>
             <li>
-<<<<<<< HEAD
-                <a href="leaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">
-=======
                 <a href="displayLeaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
                     <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Leave Request</a>
             </li>
         </ul>
@@ -240,13 +182,8 @@ $mysql_db->close();
                     <div id="left">
                         <!-- Leave Type  -->
                         <div class="gap">
-<<<<<<< HEAD
-                            <label for="personalName">Leave Type</label>
-                            <select name="personalName" required>
-=======
                             <label for="leavetype">Leave Type</label>
                             <select name="leavetype" required>
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
                                 <option value="" disabled selected>Select Leave</option>
                                 <!-- Leave type Option -->
                                 <?php

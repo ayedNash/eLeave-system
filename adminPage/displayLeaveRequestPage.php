@@ -7,22 +7,12 @@ session_start();
 require_once "../database/config.php";
 
 // Fetch data from database Leave Application
-<<<<<<< HEAD
-// $sqls = "SELECT EmployeeID, PersonalName, RoleName, EmployeeTypeName, PositionCategory, EmployeePassword, EmployeeJoinDate, EmployeeAnnLeaveBalance    
-//          FROM employee
-//          LEFT JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID
-//          LEFT JOIN role ON employee.RoleID = role.RoleID
-//          LEFT JOIN employeetype ON employee.EmployeeTypeID = employeetype.EmployeeTypeID
-//          LEFT JOIN position ON employee.PositionID = position.PositionID;";
-// $data = mysqli_query($mysql_db, $sqls);
-=======
 $sqls = "SELECT LeaveApplicationID, employee.EmployeeID, personaldetails.PersonalName, LeaveTypeName, LeaveStartDate, LeaveEndDate, LeavePeriod
          FROM leaveapplication
          INNER JOIN employee ON leaveapplication.EmployeeID = employee.EmployeeID
          INNER JOIN leavetype ON leaveapplication.LeaveTypeID = leavetype.LeaveTypeID
          INNER JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID;";
 $data = mysqli_query($mysql_db, $sqls);
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
 
 // LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match
 
@@ -159,40 +149,15 @@ $mysql_db->close();
                     <tr>
                         <th>No</th>
                         <th>Employee ID</th>
-<<<<<<< HEAD
-                        <th>Leave Type</th>
-                        <th>Leave Entitlement Day</th>
-                        <th>Leave Start Date</th>
-                        <th>Leave End Date</th>
-                        <th>Leave Balance</th>
-                        <th>Leave Attachment</th>
-                        <th>Leave Status</th>
-=======
                         <th>Employee Name</th>
                         <th>Leave Type</th>
                         <th>Leave Start Date</th>
                         <th>Leave End Date</th>
                         <th>Leave Period</th>
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        
-=======
                     <?php
                     $counter = 1; // Initialize counter variable
                     // $data->data_seek(0); // Reset data pointer for reuse the $data variable
@@ -218,7 +183,6 @@ $mysql_db->close();
                         echo "<tr><td colspan='3'>No roles found.</td></tr>";
                     }
                     ?>
->>>>>>> bfced9abfe4691a38b457dc25851f86d8db8961f
                 </tbody>
             </table>
         </div>
