@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             // Redirect based on employee RoleID
                             if ($RoleID == 1) {
-                                header('location: adminPage/rolePage.php');
+                                header("location: adminPage/homeAdminPage.php?empID=" . urlencode($EmployeeID));
                             } else if ($RoleID == 2) {
                                 header("location: userPage/employee.php?empID=" . urlencode($EmployeeID));
                             } else {
@@ -134,14 +134,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Login Form  -->
         <div class="form-box signIn">
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <h1>Login</h1>
+                <!-- <h1>Login Here</h1> -->
 
                 <!-- Employee ID -->
                 <div class="input-box <?php (!empty($empID_err)) ? 'has_error' : ''; ?>">
                     <input type="text" name="empID" id="empID" value="<?php echo $empID ?>"
                         placeholder="Your Employee ID" required />
                     <i class="bx bxs-user"></i>
-                    <span class="help-block"><?php echo $empID_err; ?></span>
+                    <span class="help-block" style="color: red;"><?php echo $empID_err; ?></span>
                 </div>
 
                 <!-- Employee Password -->
@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="toggle-box">
             <!-- toggle-left -->
             <div class="toggle-panel toggle-left">
-                <h1>Hello, Welcome!</h1>
+                <h1>e-Leave System</h1>
                 <!-- <p>Don't have an account?</p>
           <button class="btn signUp-btn">Sign Up</button> -->
             </div>

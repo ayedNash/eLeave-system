@@ -123,35 +123,34 @@ $mysql_db->close();
                     Home</a>
             </li>
             <li>
-                <a href="/adminPage/displayPersonaldetailPage.php"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="../displayEmployeePage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
             </li>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="../displayLeaveRequestPage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Request</a>
             </li>
             <li>
-                <a href="/adminPage/rolePage.php"><img
+                <a href="../rolePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Role</a>
             </li>
             <li>
-                <a href="/adminPage/positionPage.php"><img
+                <a href="../positionPage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Position</a>
             </li>
             <li>
-                <a href="/adminPage/employeetypePage.php"><img
+                <a href="../employeetypePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employee Type</a>
             </li>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="../leavetypePage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Type</a>
-            </li>
-            <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Entitlement</a>
             </li>
         </ul>
     </div>
@@ -162,9 +161,10 @@ $mysql_db->close();
                 <h1>Good Afternoon, Admin</h1>
             </div>
 
-            <div id="right">
-                <button onclick="redirect()">Back</button>
-            </div>
+            <!-- Logout Button -->
+            <form action="../logout.php" method="POST">
+                <button type="submit" onclick="return confirm('Logout?');">Logout</button>
+            </form>
         </header>
 
         <!-- Role form -->

@@ -98,7 +98,7 @@ $mysql_db->close();
             background-color: #04222a;
         }
     </style>
-    <link rel="stylesheet" href="../assets/css/nav.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/nav2.css" media="screen" />
     <link rel="stylesheet" href="../assets/css/table.css" media="screen" />
     <link rel="stylesheet" href="../assets/css/form.css" media="screen" />
 </head>
@@ -112,12 +112,13 @@ $mysql_db->close();
                     Home</a>
             </li>
             <li>
-                <a href="displayPersonaldetailPage.php"><img
+                <a href="displayEmployeePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
             </li>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="displayLeaveRequestPage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Request</a>
             </li>
             <li>
@@ -139,11 +140,8 @@ $mysql_db->close();
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Type</a>
             </li>
-            <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Entitlement</a>
-            </li>
         </ul>
+    </div>
     </div>
 
     <div class="mainContentList">

@@ -6,6 +6,9 @@ session_start();
 // Include config file
 require_once "../database/config.php";
 
+$empID = $_SESSION['empID'];
+
+
 // Define variables and initialize with empty values. 
 $positionCategory = "";
 $positionName_err = "";
@@ -83,6 +86,46 @@ if (isset($_GET['id'])) {
     }
 }
 
+// Fetch employee records.
+if (isset($_GET['empID'])) {
+    $empID = $_GET['empID'];
+
+    // Fetch employee details
+    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, role.RoleID, RoleName, employeetype.EmployeeTypeID, EmployeeTypeName, position.PositionID, PositionCategory, EmployeePassword, EmployeeJoinDate    
+         FROM employee
+         LEFT JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID
+         LEFT JOIN role ON employee.RoleID = role.RoleID
+         LEFT JOIN employeetype ON employee.EmployeeTypeID = employeetype.EmployeeTypeID
+         LEFT JOIN position ON employee.PositionID = position.PositionID
+         WHERE EmployeeID = ? ";
+
+
+    if ($stmt = $mysql_db->prepare($sql2)) {
+        $stmt->bind_param("s", $empID);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $empID = $row['EmployeeID'];
+                $empPersonalID = $row['PersonalDetailsID'];
+                $empName = $row['PersonalName'];
+                $empRole = $row['RoleName'];
+
+            } else {
+                echo "Employee Details not found.";
+                exit;
+            }
+        } else {
+            echo "Error fetching employee details.";
+            exit;
+        }
+
+        $stmt->close();
+    }
+}
+
+
 // Close the connection
 $mysql_db->close();
 
@@ -111,53 +154,49 @@ $mysql_db->close();
             background-color: #04222a;
         }
     </style>
-    <link rel="stylesheet" href="../assets/css/nav.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/table.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/form.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/nav2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/table2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/form2.css" media="screen" />
 </head>
 
 <body>
-<div class="nav">
-        <h2>nav</h2>
+    <div class="nav">
+        <h2>e-Leave</h2>
         <ul>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png"
-                        alt="home" />
+                <a href="homeAdminPage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
+                        src="https://img.icons8.com/material-rounded/24/home.png" alt="home" />
                     Home</a>
             </li>
             <li>
-                <a href="displayPersonaldetailPage.php"><img
+                <a href="displayEmployeePage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
             </li>
             <li>
-                <a href="#"><img
+                <a href="displayLeaveRequestPage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Request</a>
             </li>
             <li>
-                <a href="rolePage.php"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="rolePage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Role</a>
             </li>
             <li>
-                <a href="positionPage.php"><img
+                <a href="positionPage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Position</a>
             </li>
             <li>
-                <a href="employeetypePage.php"><img
+                <a href="employeetypePage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employee Type</a>
             </li>
             <li>
-                <a href="positionPage.php"><img
+                <a href="leavetypePage.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Type</a>
-            </li>
-            <li>
-                <a href="positionPage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Entitlement</a>
             </li>
         </ul>
     </div>
@@ -165,7 +204,8 @@ $mysql_db->close();
     <div class="mainContentList">
         <header id="adminHeader">
             <div id="left">
-                <h1>Good Afternoon, Admin</h1>
+                <h1>Good Afternoon, <?php echo htmlspecialchars($empName) . " (" .
+                    htmlspecialchars($empRole) . ")"; ?></h1>
             </div>
 
             <!-- <div id="right">
@@ -187,9 +227,7 @@ $mysql_db->close();
                     <div id="left">
                         <!-- Position name -->
                         <div class="gap">
-                            <label for="positionCategory">Position Name</label>
-                            <input required type="text" name="positionCategory" placeholder="Enter position name"
-                                 />
+                            <input required type="text" name="positionCategory" placeholder="Enter Position Name" />
                             <span id="positionCategory"></span>
                         </div>
 
@@ -204,10 +242,8 @@ $mysql_db->close();
         </div>
 
         <!-- Table form (retrieve value)  -->
-        <div id="positionForm-table">
-            <h1>Position Data</h1>
+        <div id="Form-table">
             <table class="data-table">
-                <caption class="title">Position data</caption>
                 <thead>
                     <tr>
                         <th>NO</th>

@@ -70,9 +70,9 @@ $mysql_db->close();
             background-color: #04222a;
         }
     </style>
-    <link rel="stylesheet" href="../assets/css/nav.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/table.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/form.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/nav2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/table2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/form2.css" media="screen" />
 </head>
 
 <body>
@@ -84,11 +84,13 @@ $mysql_db->close();
                     Home</a>
             </li>
             <li>
-                <a href="displayPersonaldetailPage.php"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="displayEmployeePage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
             </li>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="displayLeaveRequestPage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Request</a>
             </li>
             <li>
@@ -109,10 +111,6 @@ $mysql_db->close();
                 <a href="leavetypePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Type</a>
-            </li>
-            <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Entitlement</a>
             </li>
         </ul>
     </div>
@@ -135,13 +133,12 @@ $mysql_db->close();
 
         <!-- Table form (retrieve value)  -->
 
-        <div>
-            <button name="createPersonal"><a href="../adminPage/personaldetailPage.php">Add Personal Detail + </a></button>
+        <div class="buttonAdd">
+            <button name="createPersonal"><a href="../adminPage/personaldetailPage.php">Add Personal Detail +
+                </a></button>
         </div>
-        <div id="personaldetailForm-table">
-            <h1>Personal Detail Data</h1>
+        <div id="Form-table">
             <table class="data-table">
-                <caption class="title">Personal Detail Data</caption>
                 <thead>
                     <tr>
                         <th>No</th>
@@ -181,7 +178,8 @@ $mysql_db->close();
                                 <td><?php echo htmlspecialchars($row['PersonalPhoneNumber']); ?></td>
                                 <td><?php echo htmlspecialchars($row['PersonalRace']); ?></td>
                                 <td>
-                                    <a href="update/editPersonaldetail.php?id=<?php echo $row['PersonalDetailsID']; ?>">Edit</a> |
+                                    <a href="update/editPersonaldetail.php?id=<?php echo $row['PersonalDetailsID']; ?>">Edit</a>
+                                    |
                                     <a href="displayPersonaldetailPage.php?id=<?php echo $row['PersonalDetailsID']; ?>"
                                         onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
                                 </td>

@@ -4,44 +4,9 @@
 session_start();
 
 // Include config file
-require_once "../../database/config.php";
+require_once "../database/config.php";
 
 $empID = $_SESSION['empID'];
-
-// Process submitted approved or reject button.
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // validate leave application id, approve or reject button clicked.
-    $leaveApplicationID = trim($_POST['leaveapplicationID']);
-
-    if (isset($_POST['approve'])) {
-        $LeaveStatus = 'Approved';
-    } elseif (isset($_POST['reject'])) {
-        $LeaveStatus = 'Rejected';
-    }
-
-    // Update the leave status in the table
-    if (isset($LeaveStatus)) {
-        $sql = "UPDATE leaveapplication 
-                SET LeaveStatus = ? 
-                WHERE LeaveApplicationID = ?";
-
-        if ($stmt = $mysql_db->prepare($sql)) {
-            $stmt->bind_param("si", $LeaveStatus, $leaveApplicationID);
-
-            if ($stmt->execute()) {
-                echo "<script>
-                      alert('Leave status updated to $LeaveStatus successfully!');
-                      window.location.href = '../displayLeaveRequestPage.php'; // Redirect to the leave request page
-                      </script>";
-            } else {
-                echo "Error updating leave status.";
-            }
-
-            $stmt->close();
-        }
-    }
-}
 
 // display leave application based on user requested.
 if (isset($_GET['leaveRequestID'])) {
@@ -84,8 +49,9 @@ if (isset($_GET['leaveRequestID'])) {
 
         $stmt->close();
     }
-}
 
+
+}
 
 // Close the connection
 $mysql_db->close();
@@ -115,56 +81,38 @@ $mysql_db->close();
             background-color: #04222a;
         }
     </style>
-    <link rel="stylesheet" href="../../assets/css/nav.css" media="screen" />
-    <link rel="stylesheet" href="../../assets/css/table.css" media="screen" />
-    <link rel="stylesheet" href="../../assets/css/form.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/nav.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/table.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/form.css" media="screen" />
 </head>
 
+<body>
     <div class="nav">
         <h2>nav</h2>
         <ul>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" alt="home" />
+                <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" />
                     Home</a>
             </li>
             <li>
-                <a href="../displayEmployeePage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Employees</a>
+                <a href="employee.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png" />Employees</a>
             </li>
             <li>
-                <a href="../displayLeaveRequestPage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Request</a>
+                <a href="profile.php?empID=<?php echo htmlspecialchars($empID) ?>">
+                    <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Profile</a>
             </li>
             <li>
-                <a href="../rolePage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Role</a>
-            </li>
-            <li>
-                <a href="../positionPage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Position</a>
-            </li>
-            <li>
-                <a href="../employeetypePage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Employee Type</a>
-            </li>
-            <li>
-                <a href="../leavetypePage.php"><img
-                        src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Type</a>
+                <a href="displayLeaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">
+                    <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Leave Request</a>
             </li>
         </ul>
-    </div>
     </div>
 
     <div class="mainContentList">
         <header id="adminHeader">
             <div id="left">
-                <h1>Good Afternoon, Admin</h1>
+                <h1>Good Afternoon, <?php echo htmlspecialchars($personalName); ?></h1>
             </div>
 
             <!-- <div id="right">
@@ -184,20 +132,6 @@ $mysql_db->close();
                     <legend>Leave Request </legend>
 
                     <div id="left">
-                        <!-- Leave Application ID  -->
-                        <input type="hidden" name="leaveapplicationID"
-                            value="<?php echo htmlspecialchars($leaveApplicationID); ?>" />
-
-                        <!-- Em[loyee ID  -->
-                        <div class="gap">
-                            <input readonly type="text" name="personalName"
-                                value="<?php echo htmlspecialchars($employeeID); ?>" />
-                        </div>
-                        <!-- Em[loyee Name  -->
-                        <div class="gap">
-                            <input readonly type="text" name="personalName"
-                                value="<?php echo htmlspecialchars($personalName); ?>" />
-                        </div>
                         <!-- Leave Type -->
                         <div class="gap">
                             <input readonly type="text" name="personalName"
@@ -209,46 +143,36 @@ $mysql_db->close();
                             <input readonly type="text" name="personalName"
                                 value="<?php echo htmlspecialchars($leaveStart); ?>" />
                         </div>
-
+                       
                         <!-- Leave Start Date -->
                         <div class="gap">
                             <input readonly type="text" name="personalName"
                                 value="<?php echo htmlspecialchars($leaveEnd); ?>" />
                         </div>
-
+                        
                         <!-- Leave Status -->
                         <div class="gap">
                             <input readonly type="text" name="personalName"
                                 value="<?php echo htmlspecialchars($leaveStatus); ?>" />
                         </div>
-
+                        
                         <!-- Leave Status -->
                         <div class="gap">
                             <input readonly type="text" name="personalName"
                                 value="<?php echo htmlspecialchars($leaveReason); ?>" />
                         </div>
-
+                       
                         <!-- Leave Period -->
                         <div class="gap">
                             <input readonly type="text" name="personalName"
                                 value="<?php echo htmlspecialchars($leavePeriod); ?>" />
                         </div>
 
-                        <!-- Approved button -->
-                        <div class="gap">
-                            <button type="submit" name="approve"
-                                onclick="return confirm('Are you sure you want to approve this request?');">Approve</button>
-                        </div>
-                        <!-- Rejected button -->
-                        <div class="gap">
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you sure you want to reject this request?');">Reject</button>
-                        </div>
                     </div>
                 </fieldset>
             </form>
         </div>
     </div>
-    </body>
+</body>
 
 </html>

@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
     $empID = $_GET['id'];
 
     // Fetch employee details
-    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, role.RoleID, RoleName, employeetype.EmployeeTypeID, EmployeeTypeName, position.PositionID, PositionCategory, EmployeePassword, EmployeeJoinDate, EmployeeAnnLeaveBalance    
+    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, role.RoleID, RoleName, employeetype.EmployeeTypeID, EmployeeTypeName, position.PositionID, PositionCategory, EmployeePassword, EmployeeJoinDate    
          FROM employee
          LEFT JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID
          LEFT JOIN role ON employee.RoleID = role.RoleID
@@ -115,7 +115,6 @@ if (isset($_GET['id'])) {
                 $empPosition = $row['PositionCategory'];
                 $empPassword = $row['EmployeePassword'];
                 $empJoinDate = $row['EmployeeJoinDate'];
-                $empAnnLeave = $row['EmployeeAnnLeaveBalance'];
             } else {
                 echo "Employee Details not found.";
                 exit;
@@ -171,36 +170,33 @@ $mysql_db->close();
                     Home</a>
             </li>
             <li>
-                <a href="/adminPage/displayPersonaldetailPage.php"><img
+                <a href="../displayEmployeePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employees</a>
             </li>
             <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="../displayLeaveRequestPage.php"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Request</a>
             </li>
             <li>
-                <a href="rolePage.php"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
+                <a href="../rolePage.php"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Role</a>
             </li>
             <li>
-                <a href="positionPage.php"><img
+                <a href="../positionPage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Position</a>
             </li>
             <li>
-                <a href="employeetypePage.php"><img
+                <a href="../employeetypePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Employee Type</a>
             </li>
             <li>
-                <a href="leavetypePage.php"><img
+                <a href="../leavetypePage.php"><img
                         src="https://img.icons8.com/material/24/conference-background-selected.png"
                         alt="Employees" />Leave Type</a>
-            </li>
-            <li>
-                <a href="#"><img src="https://img.icons8.com/material/24/conference-background-selected.png"
-                        alt="Employees" />Leave Entitlement</a>
             </li>
         </ul>
     </div>
@@ -309,14 +305,7 @@ $mysql_db->close();
                             <input required type="date" name="employeeJoinDate"
                                 value="<?php echo htmlspecialchars($empJoinDate); ?>" />
                         </div>
-
-                        <!-- Emp Ann Leave Balance -->
-                        <div class="gap">
-                            <label for="employeeAnnLvBal">Employee Annual Leave Balance</label>
-                            <input required type="text" name="employeeAnnLvBal"
-                                value="<?php echo htmlspecialchars($empAnnLeave); ?>" />
-                        </div>
-
+                        
                         <!-- submit button -->
                         <div class="gap">
                             <input name="submit" type="submit" value="submit" />

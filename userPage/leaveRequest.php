@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-// To called employee details.
+// To called employee details.X
 if (isset($_GET['empID'])) {
     $empID = $_GET['empID'];
 
@@ -132,7 +132,7 @@ $mysql_db->close();
 
 <body>
     <div class="nav">
-        <h2>nav</h2>
+        <h2>e-Leave</h2>
         <ul>
             <li>
                 <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" />

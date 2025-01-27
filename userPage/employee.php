@@ -21,28 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $empPosition = trim($_POST['positionName']);
     $empPassword = trim($_POST['employeePassword']);
     $empJoinDate = trim($_POST['employeeJoinDate']);
-    $empAnnLeave = trim($_POST['employeeAnnLvBal']);
 
     // Hash the password
     $hashedPassword = password_hash($empPassword, PASSWORD_BCRYPT);
 
     // Update values in employee details
     $sql = "UPDATE employee 
-            SET EmployeeID = ?, RoleID = ?, EmployeeTypeID = ?, PositionID = ?, EmployeePassword = ?, EmployeeJoinDate = ?, EmployeeAnnLeaveBalance = ?
+            SET EmployeeID = ?, RoleID = ?, EmployeeTypeID = ?, PositionID = ?, EmployeePassword = ?, EmployeeJoinDate = ?
             WHERE EmployeeID = ?";
 
     if ($stmt = $mysql_db->prepare($sql)) {
 
         // Bind paramaters to the prepared statement
         $stmt->bind_param(
-            "siiissis",
+            "siiisss",
             $empID,
             $empRole,
             $empType,
             $empPosition,
             $hashedPassword,
             $empJoinDate,
-            $empAnnLeave,
             $empID
         );
 
@@ -88,7 +86,7 @@ if (isset($_GET['empID'])) {
     $empID = $_GET['empID'];
 
     // Fetch employee details
-    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, role.RoleID, RoleName, employeetype.EmployeeTypeID, EmployeeTypeName, position.PositionID, PositionCategory, EmployeePassword, EmployeeJoinDate, EmployeeAnnLeaveBalance    
+    $sql2 = "SELECT EmployeeID, personaldetails.PersonalDetailsID, PersonalName, role.RoleID, RoleName, employeetype.EmployeeTypeID, EmployeeTypeName, position.PositionID, PositionCategory, EmployeePassword, EmployeeJoinDate    
          FROM employee
          LEFT JOIN personaldetails ON employee.PersonalDetailsID = personaldetails.PersonalDetailsID
          LEFT JOIN role ON employee.RoleID = role.RoleID
@@ -115,7 +113,6 @@ if (isset($_GET['empID'])) {
                 $empPosition = $row['PositionCategory'];
                 $empPassword = $row['EmployeePassword'];
                 $empJoinDate = $row['EmployeeJoinDate'];
-                $empAnnLeave = $row['EmployeeAnnLeaveBalance'];
             } else {
                 echo "Employee Details not found.";
                 exit;
@@ -188,7 +185,8 @@ $mysql_db->close();
     <div class="mainContentList">
         <header id="adminHeader">
             <div id="left">
-                <h1>Good Afternoon, <?php echo htmlspecialchars($empName); ?></h1>
+                <h1>Good Afternoon, <?php echo htmlspecialchars($empName) . " (" .
+                    htmlspecialchars($empRole) . ")"; ?></h1>
             </div>
 
             <!-- <div id="right">
@@ -288,13 +286,6 @@ $mysql_db->close();
                             <label for="employeeJoinDate">Emp Join Date</label>
                             <input required type="date" name="employeeJoinDate"
                                 value="<?php echo htmlspecialchars($empJoinDate); ?>" />
-                        </div>
-
-                        <!-- Emp Ann Leave Balance -->
-                        <div class="gap">
-                            <label for="employeeAnnLvBal">Employee Annual Leave Balance</label>
-                            <input required type="text" name="employeeAnnLvBal"
-                                value="<?php echo htmlspecialchars($empAnnLeave); ?>" />
                         </div>
 
                         <!-- submit button -->

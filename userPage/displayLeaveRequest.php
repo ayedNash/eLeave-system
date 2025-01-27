@@ -105,14 +105,14 @@ $mysql_db->close();
             background-color: #04222a;
         }
     </style>
-    <link rel="stylesheet" href="../assets/css/nav.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/table.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/form.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/nav2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/table2.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/form2.css" media="screen" />
 </head>
 
 <body>
     <div class="nav">
-        <h2>nav</h2>
+        <h2>e-Leave</h2>
         <ul>
             <li>
                 <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" />
@@ -155,10 +155,8 @@ $mysql_db->close();
             <button name="leaveRequest"><a href="leaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">Add Leave Request + </a></button>
         </div>
 
-        <div id="personaldetailForm-table">
-            <h1>Employee Data</h1>
+        <div id="Form-table">
             <table class="data-table">
-                <caption class="title">Leave Request</caption>
                 <thead>
                     <tr>
                         <th>No</th>
@@ -186,7 +184,7 @@ $mysql_db->close();
                                 <td><?php echo htmlspecialchars($row["LeavePeriod"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["LeaveStatus"]); ?></td>
                                 <td>
-                                    <a href="update/viewLeaveRequest.php?id=<?php echo $row['LeaveApplicationID']; ?>">View</a>
+                                    <a href="viewLeaveRequest.php?leaveRequestID=<?php echo $row['LeaveApplicationID']; ?>">View</a>
                                 </td>
                             </tr>
                             <?php
