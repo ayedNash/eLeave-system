@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // success message
             echo "<script>alert('Personal Details successfully updated!`');
+            window.location.href = 'profile.php';
              window.location.href = 'profile.php?empID=' + encodeURIComponent('$empID');
             </script>";
         } else {
@@ -149,11 +150,14 @@ $mysql_db->close();
         <h2>nav</h2>
         <ul>
             <li>
+                <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" alt="home" />
                 <a href="#"><img src="https://img.icons8.com/material-rounded/24/home.png" />
                     Home</a>
             </li>
             <li>
                 <a href="employee.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
+                        alt="Employees" />Employees</a>
                         src="https://img.icons8.com/material/24/conference-background-selected.png" />Employees</a>
             </li>
             <li>
@@ -161,6 +165,9 @@ $mysql_db->close();
                     <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Profile</a>
             </li>
             <li>
+                <a href="profile.php?empID=<?php echo htmlspecialchars($empID) ?>"><img
+                        src="https://img.icons8.com/material/24/conference-background-selected.png"
+                        alt="Profile" />Profile</a>
                 <a href="displayLeaveRequest.php?empID=<?php echo htmlspecialchars($empID) ?>">
                     <img src="https://img.icons8.com/material/24/conference-background-selected.png" />Leave Request</a>
             </li>
